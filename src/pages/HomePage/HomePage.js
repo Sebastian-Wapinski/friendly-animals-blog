@@ -23,10 +23,11 @@ export const HomePage = () => {
         <StyledNav>
           {(
             document.data.navbar.map((navItem, index) => {
+              const navbarName = navItem.navbar_tag_name
               return (
                 <StyledNavLink
                   key={`${navItem.navbar_tag_name}-${index}`}
-                  to={navItem.navbar_tag_name === 'HOME' ? '/' : `/animals/${navItem.navbar_tag_link.uid}`}
+                  to={navbarName === 'HOME' ? '/' : `/animals/${navItem.navbar_tag_link.uid}`}
                 >
                   {navItem.navbar_tag_name}
                 </StyledNavLink>

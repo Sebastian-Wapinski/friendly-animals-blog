@@ -20,14 +20,14 @@ const App = () => {
             element={<HomePage />}
           >
             <Route
-              path={'/animals'}
+              path={'/animals/all-animals'}
               element={<AnimalsPage />}
             >
-              <Route
-                path={'/animals/:animalType'}
-                element={<AnimalTypePage />}
-              />
             </Route>
+            <Route
+              path={'/animals/:animalType'}
+              element={<AnimalTypePage />}
+            />
           </Route>
           <Route
             path={'/animals/:animalType/:currentAnimal'}

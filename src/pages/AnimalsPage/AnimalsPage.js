@@ -1,33 +1,40 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { StyledAnimalsPage } from './AnimalsPage.styled'
-import { Outlet, useOutlet } from 'react-router-dom'
 
-export const AnimalsPage = (props) => {
-  const {
-    children,
-    ...otherProps
-  } = props
+import { useAllPrismicDocumentsByType } from '@prismicio/react'
 
-  const outlet = useOutlet()
+import SnippetPost from '../../components/SnippetPost'
+
+export const AnimalsPage = () => {
+  const [document] = useAllPrismicDocumentsByType('category')
+
+  const animalsArr = document && document.flatMap((category) => {
+    return category.data.animal_group.map(animal => {
+      return animal
+    })
+  }, [])
+
+  const animalsArrJSX = animalsArr && animalsArr.map(animal => {
+    return (
+      <SnippetPost
+        key={animal.paste_links.id}
+        postInfo={animal}
+      />
+    )
+  })
+
+  console.log(animalsArrJSX)
 
   return (
-    <StyledAnimalsPage
-      {...otherProps}
-    >
+    <StyledAnimalsPage>
       {
-        outlet ?
-          <Outlet />
-          :
-          'Animals'
+        animalsArrJSX && animalsArrJSX.map(animal => {
+          return animal
+        })
       }
     </StyledAnimalsPage>
   )
-}
-
-AnimalsPage.propTypes = {
-  children: PropTypes.node
 }
 
 export default AnimalsPage
