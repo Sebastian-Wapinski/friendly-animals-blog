@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App'
+import App from './components/App'
 import reportWebVitals from './reportWebVitals'
 
 import { PrismicProvider } from '@prismicio/react'
@@ -9,14 +9,19 @@ import { client } from './prismic'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
+import theme from './components/style/theme'
+import { ThemeProvider } from 'styled-components'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <Router>
-      <PrismicProvider client={client}>
-        <App />
-      </PrismicProvider>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <PrismicProvider client={client}>
+          <App />
+        </PrismicProvider>
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>
 )
 
