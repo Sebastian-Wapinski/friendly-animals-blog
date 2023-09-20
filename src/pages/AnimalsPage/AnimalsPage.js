@@ -3,36 +3,46 @@ import React from 'react'
 import { StyledAnimalsPage } from './AnimalsPage.styled'
 
 import { useAllPrismicDocumentsByType } from '@prismicio/react'
-
-import SnippetPost from '../../components/SnippetPost'
+import SnippetPost from '../../components/SnippetPost/SnippetPost'
+import Pagination from '../../components/Pagination/Pagination'
+import { useLocation, useParams } from 'react-router'
 
 export const AnimalsPage = () => {
-  const [document] = useAllPrismicDocumentsByType('category')
+  const [document] = useAllPrismicDocumentsByType('post')
+  const location = useLocation()
+  const { pageNum } = useParams()
 
-  const animalsArr = document && document.flatMap((category) => {
-    return category.data.animal_group.map(animal => {
-      return animal
+  const sortedThreats = document && document
+    .map(post => {
+      return {
+        ...post,
+        createdNewDate: new Date(post.data.date)
+      }
     })
-  }, [])
+    .sort((a, b) => {
+      return Number(b.createdNewDate) - Number(a.createdNewDate)
+    })
 
-  const animalsArrJSX = animalsArr && animalsArr.map(animal => {
-    return (
-      <SnippetPost
-        key={animal.paste_links.id}
-        postInfo={animal}
-      />
-    )
-  })
-
-  console.log(animalsArrJSX)
+  const newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
 
   return (
     <StyledAnimalsPage>
-      {
-        animalsArrJSX && animalsArrJSX.map(animal => {
-          return animal
+      <Pagination
+        limit={3}
+        path={newLocation}
+        pageNum={Number(pageNum)}
+      >
+        {
+        sortedThreats && sortedThreats.map(post => {
+          return (
+            <SnippetPost
+              key={post.id}
+              postInfo={post}
+            />
+          )
         })
-      }
+          }
+      </Pagination>
     </StyledAnimalsPage>
   )
 }

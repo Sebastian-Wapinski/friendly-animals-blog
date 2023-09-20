@@ -2,13 +2,14 @@ import React from 'react'
 
 import { StyledHomePage, StyledPrismicImage, StyledPrismicTitle, StyledPrismicRichText, StyledNav, StyledNavLink } from './HomePage.styled'
 
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useParams } from 'react-router-dom'
 
 import { useSinglePrismicDocument, PrismicRichText } from '@prismicio/react'
 
 export const HomePage = () => {
   const [document] = useSinglePrismicDocument('homepage')
   const location = useLocation()
+  const { pageNum = 1, animalPageNum = 1 } = useParams()
 
   return (
     document ?
@@ -27,7 +28,13 @@ export const HomePage = () => {
               return (
                 <StyledNavLink
                   key={`${navItem.navbar_tag_name}-${index}`}
-                  to={navbarName === 'HOME' ? '/' : `/animals/${navItem.navbar_tag_link.uid}`}
+                  to={
+                    navbarName === 'HOME' ?
+                      '/' :
+                      navbarName === 'ANIMALS' ?
+                            `/all-animals/${pageNum}` :
+                            `/${navItem.navbar_tag_link.uid}/${animalPageNum}`
+                          }
                 >
                   {navItem.navbar_tag_name}
                 </StyledNavLink>

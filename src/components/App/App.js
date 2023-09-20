@@ -8,6 +8,7 @@ import CurrentAnimalPage from '../../pages/CurrentAnimalPage'
 import ResetStyle from '../style/Reset'
 
 import { StyledApp } from './App.styled'
+import PageNotFound from '../../pages/PageNotFound/PageNotFound'
 
 const App = () => {
   return (
@@ -20,18 +21,22 @@ const App = () => {
             element={<HomePage />}
           >
             <Route
-              path={'/animals/all-animals'}
+              path={'/all-animals/:pageNum'}
               element={<AnimalsPage />}
             >
             </Route>
             <Route
-              path={'/animals/:animalType'}
+              path={'/:animalType/:animalPageNum'}
               element={<AnimalTypePage />}
             />
           </Route>
           <Route
-            path={'/animals/:animalType/:currentAnimal'}
+            path={'/animal/:uid/:currentAnimal'}
             element={<CurrentAnimalPage />}
+          />
+          <Route
+            path={'*'}
+            element={<PageNotFound />}
           />
         </Routes>
       </StyledApp>

@@ -10,6 +10,10 @@ flex-direction: column;
 width: 100%;
 max-width: 90rem;
 padding: 3rem;
+
+@media (max-width: 45.25rem) {
+padding: 0.5rem;
+}
 `
 
 const StyledHomePage = styled(DefaultStyledHomePage)(
@@ -37,6 +41,10 @@ text-align: justify;
 padding: 2rem 1rem;
 width: 70%;
 min-width: 20rem;
+
+@media (max-width: 45.25rem) {
+  width: 100%;
+}
 `
 
 const StyledNav = styled.ul`
