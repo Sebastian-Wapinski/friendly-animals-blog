@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import { StyledAnimalTypePage } from './AnimalTypePage.styled'
 import { useLocation, useParams } from 'react-router-dom'
-import { usePrismicDocumentByUID } from '@prismicio/react'
+import { useAllPrismicDocumentsByTag } from '@prismicio/react'
 import Pagination from '../../components/Pagination/Pagination'
-import SnippetPostCategory from '../../components/SnippetPostCategory/SnippetPostCategory'
+import SnippetPost from '../../components/SnippetPost/SnippetPost'
 
 export const AnimalTypePage = (props) => {
   const {
@@ -15,7 +15,7 @@ export const AnimalTypePage = (props) => {
 
   const elem = useParams()
 
-  const [document] = usePrismicDocumentByUID('category', elem.animalType)
+  const [document] = useAllPrismicDocumentsByTag(elem.animalType)
 
   const location = useLocation()
   const newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
@@ -31,11 +31,11 @@ export const AnimalTypePage = (props) => {
       >
         {
           document ?
-            document.data.animal_group.map(categoryPost => {
+            document.map(post => {
               return (
-                <SnippetPostCategory
-                  key={categoryPost.paste_links.id}
-                  categoryPost={categoryPost}
+                <SnippetPost
+                  key={post.id}
+                  postInfo={post}
                 />
               )
             }) :
