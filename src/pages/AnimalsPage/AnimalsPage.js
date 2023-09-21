@@ -6,34 +6,29 @@ import { useAllPrismicDocumentsByType } from '@prismicio/react'
 import SnippetPost from '../../components/SnippetPost/SnippetPost'
 import Pagination from '../../components/Pagination/Pagination'
 import { useLocation, useParams } from 'react-router'
+import { sortDocument } from '../../helper/helper'
 
 export const AnimalsPage = () => {
   const [document] = useAllPrismicDocumentsByType('post')
   const location = useLocation()
   const { pageNum } = useParams()
 
-  const sortedThreats = document && document
-    .map(post => {
-      return {
-        ...post,
-        createdNewDate: new Date(post.data.date)
-      }
-    })
-    .sort((a, b) => {
-      return Number(b.createdNewDate) - Number(a.createdNewDate)
-    })
-
   const newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
 
+  const sortedThreats = React.useMemo(() => {
+    return sortDocument(document)
+  }, [document])
+
   return (
-    <StyledAnimalsPage>
-      <Pagination
-        limit={3}
-        path={newLocation}
-        pageNum={Number(pageNum)}
-      >
-        {
-        sortedThreats && sortedThreats.map(post => {
+    sortedThreats ?
+      <StyledAnimalsPage>
+        <Pagination
+          limit={3}
+          path={newLocation}
+          pageNum={Number(pageNum)}
+        >
+          {
+        sortedThreats.map(post => {
           return (
             <SnippetPost
               key={post.id}
@@ -42,8 +37,10 @@ export const AnimalsPage = () => {
           )
         })
           }
-      </Pagination>
-    </StyledAnimalsPage>
+        </Pagination>
+      </StyledAnimalsPage>
+      :
+      null
   )
 }
 

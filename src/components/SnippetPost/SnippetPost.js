@@ -19,29 +19,32 @@ export const SnippetPost = (props) => {
   } = props
 
   return (
-    <StyledSnippetPost
-      to={`/animal/${postInfo.uid}/${postInfo.slugs}`}
-      {...otherProps}
-    >
-      <StyledContainer>
-        <StyledImgContainer>
-          <StyledImg
-            src={postInfo.data.image_post.url}
-          />
-        </StyledImgContainer>
-        <StyledInfo>
-          <StyledTitle>
-            {postInfo.data.title_post[0].text}
-          </StyledTitle>
-          <StyledParagraph>
-            {postInfo.data.short_introduction}
-          </StyledParagraph>
-          <StyledDate>
-            {postInfo.data.date}
-          </StyledDate>
-        </StyledInfo>
-      </StyledContainer>
-    </StyledSnippetPost>
+    postInfo ?
+      <StyledSnippetPost
+        to={`/animal/${postInfo.uid}/${postInfo.slugs}`}
+        {...otherProps}
+      >
+        <StyledContainer>
+          <StyledImgContainer>
+            <StyledImg
+              src={postInfo.data.image_post.url}
+            />
+          </StyledImgContainer>
+          <StyledInfo>
+            <StyledTitle>
+              {postInfo.data.title_post[0].text}
+            </StyledTitle>
+            <StyledParagraph>
+              {postInfo.data.short_introduction}
+            </StyledParagraph>
+            <StyledDate>
+              {postInfo.data.date}
+            </StyledDate>
+          </StyledInfo>
+        </StyledContainer>
+      </StyledSnippetPost>
+      :
+      null
   )
 }
 

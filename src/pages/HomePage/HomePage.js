@@ -5,6 +5,7 @@ import { StyledHomePage, StyledPrismicImage, StyledPrismicTitle, StyledPrismicRi
 import { Outlet, useLocation, useParams } from 'react-router-dom'
 
 import { useSinglePrismicDocument, PrismicRichText } from '@prismicio/react'
+import FilterByDateForm from '../../components/FilterByDateForm/FilterByDateForm'
 
 export const HomePage = () => {
   const [document] = useSinglePrismicDocument('homepage')
@@ -17,12 +18,10 @@ export const HomePage = () => {
     document ?
       <StyledHomePage>
         <StyledPrismicImage field={document.data.blog_img} />
-
         <PrismicRichText
           field={document.data.pagetitle}
           components={{ heading1: ({ children }) => <StyledPrismicTitle>{children}</StyledPrismicTitle> }}
         />
-
         <StyledNav>
           {(
             document.data.navbar.map((navItem, index) => {
@@ -46,7 +45,7 @@ export const HomePage = () => {
             })
           )}
         </StyledNav>
-
+        <FilterByDateForm />
         {
           location.pathname === '/' ?
             <PrismicRichText

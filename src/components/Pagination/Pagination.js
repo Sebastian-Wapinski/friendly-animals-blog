@@ -33,14 +33,17 @@ export const Pagination = (props) => {
   const end = pageNum * limit
 
   return (
-    <StyledPagination
-      {...otherProps}
-    >
-      {children && children.slice(begin, end)}
-      <StyledNav>
-        <StyledUl>{links}</StyledUl>
-      </StyledNav>
-    </StyledPagination>
+    children ?
+      <StyledPagination
+        {...otherProps}
+      >
+        {children.slice(begin, end)}
+        <StyledNav>
+          <StyledUl>{links}</StyledUl>
+        </StyledNav>
+      </StyledPagination>
+      :
+      null
   )
 }
 

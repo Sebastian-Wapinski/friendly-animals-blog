@@ -6,6 +6,7 @@ import { useLocation, useParams } from 'react-router-dom'
 import { useAllPrismicDocumentsByTag } from '@prismicio/react'
 import Pagination from '../../components/Pagination/Pagination'
 import SnippetPost from '../../components/SnippetPost/SnippetPost'
+import { sortDocument } from '../../helper/helper'
 
 export const AnimalTypePage = (props) => {
   const {
@@ -16,6 +17,10 @@ export const AnimalTypePage = (props) => {
   const elem = useParams()
 
   const [document] = useAllPrismicDocumentsByTag(elem.animalType)
+
+  const sortedThreats = React.useMemo(() => {
+    return sortDocument(document)
+  }, [document])
 
   const location = useLocation()
   const newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
@@ -30,8 +35,8 @@ export const AnimalTypePage = (props) => {
         pageNum={Number(elem.animalPageNum)}
       >
         {
-          document ?
-            document.map(post => {
+          sortedThreats ?
+            sortedThreats.map(post => {
               return (
                 <SnippetPost
                   key={post.id}

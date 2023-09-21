@@ -9,6 +9,8 @@ import ResetStyle from '../style/Reset'
 
 import { StyledApp } from './App.styled'
 import PageNotFound from '../../pages/PageNotFound/PageNotFound'
+import FilteredAllData from '../../pages/FilteredAllData/FilteredAllData'
+import FilteredTypeData from '../../pages/FilteredTypeData/FilteredTypeData'
 
 const App = () => {
   return (
@@ -23,11 +25,18 @@ const App = () => {
             <Route
               path={'/all-animals/:pageNum'}
               element={<AnimalsPage />}
-            >
-            </Route>
+            />
             <Route
               path={'/:animalType/:animalPageNum'}
               element={<AnimalTypePage />}
+            />
+            <Route
+              path={'/all-animals/:pageNum/:startDate/:endDate'}
+              element={<FilteredAllData />}
+            />
+            <Route
+              path={'/:animalType/:animalPageNum/:startDate/:endDate'}
+              element={<FilteredTypeData />}
             />
           </Route>
           <Route
