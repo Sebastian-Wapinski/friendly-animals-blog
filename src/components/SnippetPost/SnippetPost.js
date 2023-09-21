@@ -18,8 +18,6 @@ export const SnippetPost = (props) => {
     ...otherProps
   } = props
 
-  console.log(postInfo)
-
   return (
     <StyledSnippetPost
       to={`/animal/${postInfo.uid}/${postInfo.slugs}`}

@@ -9,7 +9,9 @@ import { useSinglePrismicDocument, PrismicRichText } from '@prismicio/react'
 export const HomePage = () => {
   const [document] = useSinglePrismicDocument('homepage')
   const location = useLocation()
-  const { pageNum = 1, animalPageNum = 1 } = useParams()
+  const { pageNum = 1, animalPageNum = 1, animalType } = useParams()
+
+  const animalTypeUpper = animalType && animalType.toUpperCase()
 
   return (
     document ?
@@ -33,7 +35,9 @@ export const HomePage = () => {
                       '/' :
                       navbarName === 'ANIMALS' ?
                             `/all-animals/${pageNum}` :
-                            `/${navItem.navbar_tag_link.uid}/${animalPageNum}`
+                        navbarName === animalTypeUpper ?
+                            `/${navItem.navbar_tag_link.uid}/${animalPageNum}` :
+                            `/${navItem.navbar_tag_link.uid}/1`
                           }
                 >
                   {navItem.navbar_tag_name}

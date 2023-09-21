@@ -21,6 +21,7 @@ display: grid;
 grid-template-columns: 1fr;
 grid-template-areas: 'navLink navLink navLink navLink';
 min-height: 5rem;
+list-style-type: none;
 `
 
 const StyledLink = styled(NavLink)`

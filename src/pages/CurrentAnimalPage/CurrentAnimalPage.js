@@ -1,7 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { StyledCurrentAnimalPage } from './CurrentAnimalPage.styled'
+import {
+  StyledCurrentAnimalPage,
+  StyledBackButton,
+  StyledImgContainer,
+  StyledImg,
+  StyledInfo,
+  StyledTitle,
+  StyledShortText,
+  StyledContent,
+  StyledPublicationDate
+} from './CurrentAnimalPage.styled'
+
+import { usePrismicDocumentByUID } from '@prismicio/react'
+import { useNavigate, useParams } from 'react-router'
 
 export const CurrentAnimalPage = (props) => {
   const {
@@ -9,12 +22,54 @@ export const CurrentAnimalPage = (props) => {
     ...otherProps
   } = props
 
+  const { uid } = useParams()
+  const [document] = usePrismicDocumentByUID('post', uid)
+
+  const navigate = useNavigate()
+
   return (
-    <StyledCurrentAnimalPage
-      {...otherProps}
-    >
-      existing
-    </StyledCurrentAnimalPage>
+    document ?
+      <StyledCurrentAnimalPage
+        {...otherProps}
+      >
+        <StyledBackButton
+          onClick={() => navigate(-1)}
+        >
+          GO BACK
+        </StyledBackButton>
+        <StyledImgContainer
+          width={document.data.image_post.dimensions.width}
+          height={document.data.image_post.dimensions.height}
+        >
+          <StyledImg
+            src={document.data.image_post.url}
+          />
+        </StyledImgContainer>
+        <StyledInfo>
+          <StyledTitle>
+            {document.data.title_post[0].text}
+          </StyledTitle>
+          <StyledShortText>
+            {document.data.short_introduction}
+          </StyledShortText>
+          {
+            document.data.content_post.map((paragraph, index) => {
+              return (
+                <StyledContent
+                  key={index}
+                >
+                  {paragraph.text}
+                </StyledContent>
+              )
+            })
+          }
+          <StyledPublicationDate>
+            {document.data.date}
+          </StyledPublicationDate>
+        </StyledInfo>
+      </StyledCurrentAnimalPage>
+      :
+      null
   )
 }
 
