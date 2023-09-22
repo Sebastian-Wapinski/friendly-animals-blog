@@ -9,6 +9,8 @@ export const Pagination = (props) => {
     limit = 3,
     path,
     pageNum,
+    startDate,
+    endDate,
     ...otherProps
   } = props
 
@@ -20,11 +22,20 @@ export const Pagination = (props) => {
       <li
         key={index}
       >
-        <StyledLink
-          to={`${path}/${index + 1}`}
-        >
-          {index + 1}
-        </StyledLink>
+        {
+        startDate && endDate ?
+          <StyledLink
+            to={`${path}/${index + 1}/${startDate}/${endDate}`}
+          >
+            {index + 1}
+          </StyledLink>
+          :
+          <StyledLink
+            to={`${path}/${index + 1}`}
+          >
+            {index + 1}
+          </StyledLink>
+      }
       </li>
     )
   })
@@ -51,7 +62,9 @@ Pagination.propTypes = {
   children: PropTypes.node,
   limit: PropTypes.number,
   path: PropTypes.string,
-  pageNum: PropTypes.number
+  pageNum: PropTypes.number,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string
 }
 
 export default Pagination

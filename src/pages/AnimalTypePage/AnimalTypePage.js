@@ -7,6 +7,7 @@ import { useAllPrismicDocumentsByTag } from '@prismicio/react'
 import Pagination from '../../components/Pagination/Pagination'
 import SnippetPost from '../../components/SnippetPost/SnippetPost'
 import { sortDocument } from '../../helper/helper'
+import FilterByDateForm from '../../components/FilterByDateForm/FilterByDateForm'
 
 export const AnimalTypePage = (props) => {
   const {
@@ -15,24 +16,37 @@ export const AnimalTypePage = (props) => {
   } = props
 
   const elem = useParams()
+  const { startDate, endDate } = elem
 
   const [document] = useAllPrismicDocumentsByTag(elem.animalType)
 
-  const sortedThreats = React.useMemo(() => {
-    return sortDocument(document)
-  }, [document])
-
   const location = useLocation()
-  const newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
+
+  let newLocation
+  if (typeof startDate === 'undefined' && typeof endDate === 'undefined') {
+    newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
+  } else {
+    const deletingEnd = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
+    const deletingStart = deletingEnd.slice(0, deletingEnd.lastIndexOf('/'))
+    const deletingPageNum = deletingStart.slice(0, deletingStart.lastIndexOf('/'))
+    newLocation = deletingPageNum
+  }
+
+  const sortedThreats = React.useMemo(() => {
+    return sortDocument(document, startDate, endDate)
+  }, [document, endDate, startDate])
 
   return (
     <StyledAnimalTypePage
       {...otherProps}
     >
+      <FilterByDateForm />
       <Pagination
         limit={3}
         path={newLocation}
         pageNum={Number(elem.animalPageNum)}
+        startDate={startDate}
+        endDate={endDate}
       >
         {
           sortedThreats ?

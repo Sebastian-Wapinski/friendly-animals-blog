@@ -7,25 +7,37 @@ import SnippetPost from '../../components/SnippetPost/SnippetPost'
 import Pagination from '../../components/Pagination/Pagination'
 import { useLocation, useParams } from 'react-router'
 import { sortDocument } from '../../helper/helper'
+import FilterByDateForm from '../../components/FilterByDateForm/FilterByDateForm'
 
 export const AnimalsPage = () => {
   const [document] = useAllPrismicDocumentsByType('post')
   const location = useLocation()
-  const { pageNum } = useParams()
+  const { pageNum, startDate, endDate } = useParams()
 
-  const newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
+  let newLocation
+  if (typeof startDate === 'undefined' && typeof endDate === 'undefined') {
+    newLocation = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
+  } else {
+    const deletingEnd = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
+    const deletingStart = deletingEnd.slice(0, deletingEnd.lastIndexOf('/'))
+    const deletingPageNum = deletingStart.slice(0, deletingStart.lastIndexOf('/'))
+    newLocation = deletingPageNum
+  }
 
   const sortedThreats = React.useMemo(() => {
-    return sortDocument(document)
-  }, [document])
+    return sortDocument(document, startDate, endDate)
+  }, [document, endDate, startDate])
 
   return (
     sortedThreats ?
       <StyledAnimalsPage>
+        <FilterByDateForm />
         <Pagination
           limit={3}
           path={newLocation}
           pageNum={Number(pageNum)}
+          startDate={startDate}
+          endDate={endDate}
         >
           {
         sortedThreats.map(post => {

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const DefaultStyledPagination = styled.div`
-
+width: 100%;
 `
 
 const StyledPagination = styled(DefaultStyledPagination)(
