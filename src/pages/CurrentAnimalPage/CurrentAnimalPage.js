@@ -15,6 +15,7 @@ import {
 
 import { usePrismicDocumentByUID } from '@prismicio/react'
 import { useNavigate, useParams } from 'react-router'
+import { Helmet } from 'react-helmet'
 
 export const CurrentAnimalPage = (props) => {
   const {
@@ -32,6 +33,13 @@ export const CurrentAnimalPage = (props) => {
       <StyledCurrentAnimalPage
         {...otherProps}
       >
+        <Helmet>
+          <title>{document.data.title_post[0].text}</title>
+          <meta
+            name={`${document.data.title_post[0].text}`}
+            content={'Displays current post'}
+          />
+        </Helmet>
         <StyledBackButton
           onClick={() => navigate(-1)}
         >

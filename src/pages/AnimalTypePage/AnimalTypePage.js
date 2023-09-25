@@ -8,6 +8,7 @@ import Pagination from '../../components/Pagination/Pagination'
 import SnippetPost from '../../components/SnippetPost/SnippetPost'
 import { sortDocument } from '../../helper/helper'
 import FilterByDateForm from '../../components/FilterByDateForm/FilterByDateForm'
+import { Helmet } from 'react-helmet'
 
 export const AnimalTypePage = (props) => {
   const {
@@ -40,6 +41,13 @@ export const AnimalTypePage = (props) => {
     <StyledAnimalTypePage
       {...otherProps}
     >
+      <Helmet>
+        <title>{elem.animalType}</title>
+        <meta
+          name={elem.animalType}
+          content={`Displays bookmark ${elem.animalType}`}
+        />
+      </Helmet>
       <FilterByDateForm />
       <Pagination
         limit={3}

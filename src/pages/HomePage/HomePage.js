@@ -5,6 +5,7 @@ import { StyledHomePage, StyledPrismicImage, StyledPrismicTitle, StyledPrismicRi
 import { Outlet, useLocation, useParams } from 'react-router-dom'
 
 import { useSinglePrismicDocument, PrismicRichText } from '@prismicio/react'
+import { Helmet } from 'react-helmet'
 
 export const HomePage = () => {
   const [document] = useSinglePrismicDocument('homepage')
@@ -16,6 +17,13 @@ export const HomePage = () => {
   return (
     document ?
       <StyledHomePage>
+        <Helmet>
+          <title>Home Page</title>
+          <meta
+            name={'Home-page'}
+            content={'description'}
+          />
+        </Helmet>
         <StyledPrismicImage field={document.data.blog_img} />
         <PrismicRichText
           field={document.data.pagetitle}

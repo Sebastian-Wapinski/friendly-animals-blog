@@ -8,6 +8,7 @@ import Pagination from '../../components/Pagination/Pagination'
 import { useLocation, useParams } from 'react-router'
 import { sortDocument } from '../../helper/helper'
 import FilterByDateForm from '../../components/FilterByDateForm/FilterByDateForm'
+import { Helmet } from 'react-helmet'
 
 export const AnimalsPage = () => {
   const [document] = useAllPrismicDocumentsByType('post')
@@ -31,6 +32,13 @@ export const AnimalsPage = () => {
   return (
     sortedThreats ?
       <StyledAnimalsPage>
+        <Helmet>
+          <title>All Animals</title>
+          <meta
+            name={'All-animals'}
+            content={'Display all animals'}
+          />
+        </Helmet>
         <FilterByDateForm />
         <Pagination
           limit={3}
