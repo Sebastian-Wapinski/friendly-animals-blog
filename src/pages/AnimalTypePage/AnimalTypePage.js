@@ -8,7 +8,7 @@ import Pagination from '../../components/Pagination/Pagination'
 import SnippetPost from '../../components/SnippetPost/SnippetPost'
 import { sortDocument } from '../../helper/helper'
 import FilterByDateForm from '../../components/FilterByDateForm/FilterByDateForm'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export const AnimalTypePage = (props) => {
   const {

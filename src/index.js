@@ -12,16 +12,20 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import theme from './components/style/theme'
 import { ThemeProvider } from 'styled-components'
 
+import { HelmetProvider } from 'react-helmet-async'
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <PrismicProvider client={client}>
-          <App />
-        </PrismicProvider>
-      </Router>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <PrismicProvider client={client}>
+            <App />
+          </PrismicProvider>
+        </Router>
+      </ThemeProvider>
+    </HelmetProvider>
   </React.StrictMode>
 )
 

@@ -15,7 +15,7 @@ import {
 
 import { usePrismicDocumentByUID } from '@prismicio/react'
 import { useNavigate, useParams } from 'react-router'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export const CurrentAnimalPage = (props) => {
   const {

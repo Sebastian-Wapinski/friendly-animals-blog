@@ -2,7 +2,7 @@ import React from 'react'
 
 import { StyledPageNotFound, StyledParagraph, StyledButton } from './PageNotFound.styled'
 import { useNavigate } from 'react-router'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export const PageNotFound = () => {
   const navigate = useNavigate()

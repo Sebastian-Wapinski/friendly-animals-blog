@@ -5,7 +5,7 @@ import { StyledHomePage, StyledPrismicImage, StyledPrismicTitle, StyledPrismicRi
 import { Outlet, useLocation, useParams } from 'react-router-dom'
 
 import { useSinglePrismicDocument, PrismicRichText } from '@prismicio/react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export const HomePage = () => {
   const [document] = useSinglePrismicDocument('homepage')
