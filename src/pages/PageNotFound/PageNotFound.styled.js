@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Button from '../../components/Button/Button'
+import responsiveness from '../../components/style/responsiveness'
 
 const DefaultStyledPageNotFound = styled.div`
 display: flex;
@@ -23,7 +24,7 @@ margin: 0.5rem 0;
 padding: 0.8rem 4rem;
 align-self: center;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   position: relative;
   top: 0;
   left: 0;

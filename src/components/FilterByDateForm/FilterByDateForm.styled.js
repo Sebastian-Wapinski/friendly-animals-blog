@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import Button from '../Button/Button'
+import responsiveness from '../style/responsiveness'
 
 const StyledFilterContainer = styled.div`
 display: flex;
 justify-content: space-between;
 width: 100%;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 flex-direction: column;
 justify-content: center;
 align-items: center;
@@ -18,7 +19,7 @@ display: flex;
 justify-content: space-around;
 width: 100%;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -36,7 +37,7 @@ align-items: center;
 color: ${props => props.theme.primaryTextColor};
 cursor: pointer;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   padding: 0.6rem 0;
 }
 `
@@ -57,7 +58,7 @@ const StyledButtonSubmit = styled(Button)`
 margin: 0.5rem 0;
 align-self: center;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   justify-content: center;
   padding: 0.8rem 4rem;
   margin: 0.7rem 0.5rem;
@@ -73,7 +74,7 @@ align-items: center;
 justify-content: center;
 flex-direction: column;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   justify-content: center;
 }
 `
@@ -84,7 +85,7 @@ border-radius: 12px;
 margin: 0;
 align-self: center;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   justify-content: center;
   padding: 0.5rem 3rem;
   margin: 0.3rem 0.5rem;

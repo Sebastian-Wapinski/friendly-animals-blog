@@ -12,7 +12,7 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   margin-top: 3rem; 
   padding: 1rem;
 }
@@ -56,7 +56,7 @@ text-align: center;
 margin: 2rem 0;
 font-size: 3rem;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 font-size: 2rem;
 margin: 1rem 0;
 }
@@ -69,7 +69,7 @@ text-align: justify;
 padding: 1rem 1rem;
 text-indent: 3rem;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 padding: 1rem 0.5rem;
 }
 `
@@ -80,7 +80,7 @@ text-align: justify;
 padding: 1rem 1rem;
 text-indent: 2rem;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 padding: 1rem 0.5rem;
 }
 `

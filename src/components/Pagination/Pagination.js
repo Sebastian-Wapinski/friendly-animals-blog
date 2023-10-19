@@ -15,18 +15,26 @@ export const Pagination = (props) => {
     ...otherProps
   } = props
 
+  const calculatePagesAmount = () => {
+    return Math.ceil((isNaN(length) ? 0 : length) / limit)
+  }
+
   const length = children && children.length
-  let pages = Math.ceil((isNaN(length) ? 0 : length) / limit)
+  const pages = calculatePagesAmount()
 
   const navigate = useNavigate()
-  React.useEffect(() => {
+
+  const isPathCorrect = React.useCallback((pageNum, startDate, endDate) => {
     const regex = /^\d{4}-\d{2}-\d{2}$/
 
-    if (pages === 0) pages++
-    if (isNaN(Number(pageNum)) || Number(pageNum) > pages || (startDate && !startDate.match(regex)) || (endDate && !endDate.match(regex))) {
+    if (isNaN(Number(pageNum)) || (startDate && !startDate.match(regex)) || (endDate && !endDate.match(regex))) {
       return navigate(`${path}/1`)
     }
-  }, [endDate, navigate, pageNum, pages, path, startDate])
+  }, [navigate, path])
+
+  React.useEffect(() => {
+    isPathCorrect(pageNum, startDate, endDate)
+  }, [endDate, isPathCorrect, navigate, pageNum, pages, path, startDate])
 
   const links = (new Array(pages).fill(0)).map((item, index) => {
     return (

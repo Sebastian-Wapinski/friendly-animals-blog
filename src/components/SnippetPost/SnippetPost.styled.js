@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import responsiveness from '../style/responsiveness'
+
 const DefaultStyledSnippetPost = styled(Link)`
 text-decoration: none;
 `
@@ -27,7 +29,7 @@ position: relative;
   left: 0;
 }
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 margin: 2rem 0;
 grid-template-rows: 10rem;
 }
@@ -56,7 +58,7 @@ color: ${props => props.theme.primaryTextColor};
 text-align: center;
 margin-bottom: 1rem;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 font-size: 1.2rem;
 }
 `
@@ -71,7 +73,7 @@ display: -webkit-box;
 text-overflow: ellipsis;
 overflow: hidden;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 display: -webkit-box;
 -webkit-line-clamp: 4;
 -webkit-box-orient: vertical;

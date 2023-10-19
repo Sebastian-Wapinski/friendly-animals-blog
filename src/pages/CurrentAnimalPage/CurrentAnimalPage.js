@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import {
   StyledCurrentAnimalPage,
@@ -18,11 +17,6 @@ import { useNavigate, useParams } from 'react-router'
 import { Helmet } from 'react-helmet-async'
 
 export const CurrentAnimalPage = (props) => {
-  const {
-    children,
-    ...otherProps
-  } = props
-
   const { uid } = useParams()
   const [document] = usePrismicDocumentByUID('post', uid)
 
@@ -30,9 +24,7 @@ export const CurrentAnimalPage = (props) => {
 
   return (
     document ?
-      <StyledCurrentAnimalPage
-        {...otherProps}
-      >
+      <StyledCurrentAnimalPage>
         <Helmet>
           <title>{document.data.title_post[0].text}</title>
           <meta
@@ -79,10 +71,6 @@ export const CurrentAnimalPage = (props) => {
       :
       null
   )
-}
-
-CurrentAnimalPage.propTypes = {
-  children: PropTypes.node
 }
 
 export default CurrentAnimalPage

@@ -2,12 +2,11 @@ import React from 'react'
 
 import { StyledFilterByDateForm, StyledLabel, StyledInput, StyledButtonSubmit, StyledButtonReset, StyledFilterContainer, StyledButtonContainer } from './FilterByDateForm.styled'
 import { useLocation, useNavigate, useParams } from 'react-router'
+import { createCurrentDate, navigateByDate } from '../../helper/helper'
 
 export const FilterByDateForm = () => {
-  const date = new Date().getDate()
-  const month = (new Date().getMonth() + 1).toString().padStart(2, '0')
-  const year = new Date().getFullYear()
-  const currentDate = `${year}-${month}-${date}`
+  const currentDate = createCurrentDate()
+
   const [start, setStart] = React.useState(currentDate)
   const [end, setEnd] = React.useState(currentDate)
 
@@ -15,27 +14,23 @@ export const FilterByDateForm = () => {
   const location = useLocation()
   const { startDate, endDate } = useParams()
 
+  const navigateByDateSubmitted = (e) => {
+    e.preventDefault()
+    const startNewDate = e.target.startDate.value
+    const endNewDate = e.target.endDate.value
+    const navigationPath = `/${startNewDate}/${endNewDate}`
+
+    navigateByDate(navigate, location, startDate, endDate, navigationPath)
+  }
+
+  const resetFilter = () => {
+    navigateByDate(navigate, location, startDate, endDate)
+  }
+
   return (
     <StyledFilterContainer>
       <StyledFilterByDateForm
-        onSubmit={(e) => {
-          e.preventDefault()
-          const startNewDate = e.target.startDate.value
-          const endNewDate = e.target.endDate.value
-
-          // console.log('submit')
-          if (!!startDate === false && !!endDate === false) {
-            const deletedPageNum = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
-
-            navigate(`${deletedPageNum}/1/${startNewDate}/${endNewDate}`)
-          } else {
-            const deletedEndDate = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
-            const deletedStartDate = deletedEndDate.slice(0, deletedEndDate.lastIndexOf('/'))
-            const deletedPageNum = deletedStartDate.slice(0, deletedStartDate.lastIndexOf('/'))
-
-            navigate(`${deletedPageNum}/1/${startNewDate}/${endNewDate}`)
-          }
-        }}
+        onSubmit={navigateByDateSubmitted}
       >
         <StyledLabel htmlFor={'startDate'}>
           STARTING DATE:
@@ -67,19 +62,7 @@ export const FilterByDateForm = () => {
       </StyledFilterByDateForm>
       <StyledButtonContainer>
         <StyledButtonReset
-          onClick={() => {
-            if (!!startDate === false && !!endDate === false) {
-              const deletedPageNum = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
-
-              navigate(`${deletedPageNum}/1`)
-            } else {
-              const deletedEndDate = location.pathname.slice(0, location.pathname.lastIndexOf('/'))
-              const deletedStartDate = deletedEndDate.slice(0, deletedEndDate.lastIndexOf('/'))
-              const deletedPageNum = deletedStartDate.slice(0, deletedStartDate.lastIndexOf('/'))
-
-              navigate(`${deletedPageNum}/1`)
-            }
-          }}
+          onClick={resetFilter}
         >
           RESET
         </StyledButtonReset>

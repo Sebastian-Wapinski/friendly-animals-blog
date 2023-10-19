@@ -1,6 +1,7 @@
 import { PrismicImage } from '@prismicio/react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import responsiveness from '../../components/style/responsiveness'
 
 const DefaultStyledHomePage = styled.div`
 display: flex;
@@ -11,7 +12,7 @@ width: 100%;
 max-width: 90rem;
 padding: 3rem;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
 padding: 0.5rem;
 }
 `
@@ -42,7 +43,7 @@ padding: 2rem 1rem;
 width: 70%;
 min-width: 20rem;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   width: 100%;
 }
 `
@@ -54,7 +55,7 @@ background-color: ${props => props.theme.forthBackground};
 min-width: 100%;
 border-radius: 25px;
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   flex-direction: column;
   align-items: center;
 }
@@ -79,7 +80,7 @@ background-color: ${props => props.theme.primaryBackground};
 color: ${props => props.theme.forthBackground};
 }
 
-@media (max-width: 45.25rem) {
+@media (max-width: ${responsiveness.mediumSize}) {
   padding: 0.5rem 2rem;
   width: 100%;
 }
