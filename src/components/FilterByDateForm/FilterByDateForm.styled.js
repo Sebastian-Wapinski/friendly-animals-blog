@@ -37,7 +37,7 @@ color: ${props => props.theme.primaryTextColor};
 cursor: pointer;
 
 @media (max-width: 45.25rem) {
-  padding: 1rem 0;
+  padding: 0.6rem 0;
 }
 `
 
@@ -51,10 +51,6 @@ cursor: pointer;
   filter: invert(60%);
   cursor: pointer;
 }
-
-@media (max-width: 45.25rem) {
-  padding: 1rem 0;
-}
 `
 
 const StyledButtonSubmit = styled(Button)`
@@ -62,13 +58,12 @@ margin: 0.5rem 0;
 align-self: center;
 
 @media (max-width: 45.25rem) {
-  position: relative;
-  top: 0;
-  left: 0;
+  justify-content: center;
   padding: 0.8rem 4rem;
-  margin: 1rem 0;
+  margin: 0.7rem 0.5rem;
   font-weight: 600;
   font-size: 0.8rem;
+  width: 100%;
 }
 `
 
@@ -85,13 +80,17 @@ flex-direction: column;
 
 const StyledButtonReset = styled(Button)`
 padding: 0.5rem 1rem;
-border-radius: 7px;
+border-radius: 12px;
 margin: 0;
+align-self: center;
 
 @media (max-width: 45.25rem) {
-  position: relative;
-  top: 0;
-  left: 0;
+  justify-content: center;
+  padding: 0.5rem 3rem;
+  margin: 0.3rem 0.5rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  width: 100%;
 }
 `
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Button from '../../components/Button/Button'
 
+import responsiveness from '../../components/style/responsiveness'
+
 const DefaultStyledCurrentAnimalPage = styled.div`
 width: 100%;
 max-width: 90rem;
@@ -21,7 +23,15 @@ const StyledCurrentAnimalPage = styled(DefaultStyledCurrentAnimalPage)(
 )
 
 const StyledBackButton = styled(Button)`
-
+@media (max-width: ${responsiveness.mediumSize}) {
+  position: fixed;
+  top: 0;
+  left: 1rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
 `
 
 const StyledImgContainer = styled.div`

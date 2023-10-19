@@ -4,6 +4,7 @@ const DefaultStyledApp = styled.div`
 background-color: ${props => props.theme.primaryBackground};
 width: 100%;
 min-height: 100vh;
+overflow-x: hidden;
 
 display: flex;
 align-items: center;
