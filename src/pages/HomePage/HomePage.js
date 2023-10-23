@@ -33,18 +33,22 @@ export const HomePage = () => {
           {(
             document.data.navbar.map((navItem, index) => {
               const navbarName = navItem.navbar_tag_name
+
+              const links = {
+                HOME: '/',
+                ANIMALS: `/all-animals/${pageNum}`,
+                [animalTypeUpper]: `/${navItem.navbar_tag_link.uid}/${animalPageNum}`
+              }
+
               return (
                 <StyledNavLink
                   key={`${navItem.navbar_tag_name}-${index}`}
                   to={
-                    navbarName === 'HOME' ?
-                      '/' :
-                      navbarName === 'ANIMALS' ?
-                            `/all-animals/${pageNum}` :
-                        navbarName === animalTypeUpper ?
-                            `/${navItem.navbar_tag_link.uid}/${animalPageNum}` :
-                            `/${navItem.navbar_tag_link.uid}/1`
-                          }
+                    links[navbarName] ?
+                      links[navbarName]
+                      :
+                    `/${navItem.navbar_tag_link.uid}/1`
+                  }
                 >
                   {navItem.navbar_tag_name}
                 </StyledNavLink>

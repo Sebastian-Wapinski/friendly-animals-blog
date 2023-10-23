@@ -14,31 +14,38 @@ import {
 
 export const SnippetPost = (props) => {
   const {
-    postInfo,
-    ...otherProps
+    postInfo
   } = props
+
+  const {
+    uid,
+    slugs,
+    imageUrl,
+    title,
+    shortIntroduction,
+    creationDate
+  } = postInfo
 
   return (
     postInfo ?
       <StyledSnippetPost
-        to={`/animal/${postInfo.uid}/${postInfo.slugs}`}
-        {...otherProps}
+        to={`/animal/${uid}/${slugs}`}
       >
         <StyledContainer>
           <StyledImgContainer>
             <StyledImg
-              src={postInfo.data.image_post.url}
+              src={imageUrl}
             />
           </StyledImgContainer>
           <StyledInfo>
             <StyledTitle>
-              {postInfo.data.title_post[0].text}
+              {title}
             </StyledTitle>
             <StyledParagraph>
-              {postInfo.data.short_introduction}
+              {shortIntroduction}
             </StyledParagraph>
             <StyledDate>
-              {postInfo.data.date}
+              {creationDate}
             </StyledDate>
           </StyledInfo>
         </StyledContainer>

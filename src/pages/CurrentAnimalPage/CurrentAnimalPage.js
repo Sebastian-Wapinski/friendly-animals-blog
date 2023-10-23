@@ -15,20 +15,34 @@ import {
 import { usePrismicDocumentByUID } from '@prismicio/react'
 import { useNavigate, useParams } from 'react-router'
 import { Helmet } from 'react-helmet-async'
+import { getUsefulData } from '../../helper/helper'
 
-export const CurrentAnimalPage = (props) => {
+export const CurrentAnimalPage = () => {
   const { uid } = useParams()
+
   const [document] = usePrismicDocumentByUID('post', uid)
 
   const navigate = useNavigate()
+
+  if (!document) return null
+
+  const {
+    imageUrl,
+    title,
+    shortIntroduction,
+    creationDate,
+    width,
+    height,
+    paragraphsContent
+  } = getUsefulData(document)
 
   return (
     document ?
       <StyledCurrentAnimalPage>
         <Helmet>
-          <title>{document.data.title_post[0].text}</title>
+          <title>{title}</title>
           <meta
-            name={`${document.data.title_post[0].text}`}
+            name={`${title}`}
             content={'Displays current post'}
           />
         </Helmet>
@@ -38,25 +52,25 @@ export const CurrentAnimalPage = (props) => {
           GO BACK
         </StyledBackButton>
         <StyledImgContainer
-          width={document.data.image_post.dimensions.width}
-          height={document.data.image_post.dimensions.height}
+          width={width}
+          height={height}
         >
           <StyledImg
-            src={document.data.image_post.url}
+            src={imageUrl}
           />
         </StyledImgContainer>
         <StyledInfo>
           <StyledTitle>
-            {document.data.title_post[0].text}
+            {title}
           </StyledTitle>
           <StyledShortText>
-            {document.data.short_introduction}
+            {shortIntroduction}
           </StyledShortText>
           {
-            document.data.content_post.map((paragraph, index) => {
+            paragraphsContent.map((paragraph, index) => {
               return (
                 <StyledContent
-                  key={index}
+                  key={`${index}/StyledContent`}
                 >
                   {paragraph.text}
                 </StyledContent>
@@ -64,7 +78,7 @@ export const CurrentAnimalPage = (props) => {
             })
           }
           <StyledPublicationDate>
-            {document.data.date}
+            {creationDate}
           </StyledPublicationDate>
         </StyledInfo>
       </StyledCurrentAnimalPage>

@@ -2,22 +2,11 @@ import styled from 'styled-components'
 import Button from '../Button/Button'
 import responsiveness from '../style/responsiveness'
 
-const StyledFilterContainer = styled.div`
-display: flex;
-justify-content: space-between;
-width: 100%;
-
-@media (max-width: ${responsiveness.mediumSize}) {
-flex-direction: column;
-justify-content: center;
-align-items: center;
-}
-`
-
 const DefaultStyledFilterByDateForm = styled.form`
 display: flex;
 justify-content: space-around;
 width: 100%;
+margin: 1rem 0;
 
 @media (max-width: ${responsiveness.mediumSize}) {
   flex-direction: column;
@@ -54,31 +43,6 @@ cursor: pointer;
 }
 `
 
-const StyledButtonSubmit = styled(Button)`
-margin: 0.5rem 0;
-align-self: center;
-
-@media (max-width: ${responsiveness.mediumSize}) {
-  justify-content: center;
-  padding: 0.8rem 4rem;
-  margin: 0.7rem 0.5rem;
-  font-weight: 600;
-  font-size: 0.8rem;
-  width: 100%;
-}
-`
-
-const StyledButtonContainer = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-
-@media (max-width: ${responsiveness.mediumSize}) {
-  justify-content: center;
-}
-`
-
 const StyledButtonReset = styled(Button)`
 padding: 0.5rem 1rem;
 border-radius: 12px;
@@ -95,4 +59,4 @@ align-self: center;
 }
 `
 
-export { StyledFilterByDateForm, StyledLabel, StyledInput, StyledButtonSubmit, StyledButtonReset, StyledFilterContainer, StyledButtonContainer }
+export { StyledFilterByDateForm, StyledLabel, StyledInput, StyledButtonReset }
